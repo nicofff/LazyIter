@@ -1,6 +1,8 @@
 <?php
 
-abstract class BaseIterator implements Iterator {
+Namespace LazyChain\Iterators;
+
+abstract class BaseIterator implements \Iterator {
     public function rewind() {
         $this->previousIterator->rewind();
     }

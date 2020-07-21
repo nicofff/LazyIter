@@ -1,10 +1,10 @@
 <?php 
 
-require_once "Iterators/BaseIterator.php";
+Namespace LazyChain\Iterators;
 
-class F_FilterIterator extends BaseIterator implements Iterator {
+class FilterIterator extends BaseIterator implements \Iterator {
     
-    public function __construct(Iterator $previousIterator, callable $callable ) {
+    public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
         $this->callable = $callable;
     }

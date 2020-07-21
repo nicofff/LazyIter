@@ -1,10 +1,10 @@
 <?php 
 
-require_once "Iterators/BaseIterator.php";
+Namespace LazyChain\Iterators;
 
-class MapIterator extends BaseIterator implements Iterator {
+class MapIterator extends BaseIterator implements \Iterator {
 
-    public function __construct(Iterator $previousIterator, callable $callable ) {
+    public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
         $this->callable = $callable;
     }

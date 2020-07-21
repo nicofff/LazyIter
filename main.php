@@ -1,6 +1,6 @@
 <?php
-
-require_once 'LazyChain.php';
+require_once __DIR__ . '/vendor/autoload.php';
+use LazyChain\LazyChain;
 
 function foo($i){
 	// echo "evaluating". $i .PHP_EOL;
