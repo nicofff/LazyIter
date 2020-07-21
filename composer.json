@@ -1,0 +1,13 @@
+{
+    "name": "nicofff/lazychain",
+    "description": "Lazy array function chains inspired in Rust",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Far",
+            "email": "nicolasf@nearpod.com"
+        }
+    ],
+    "require": {}
+}
