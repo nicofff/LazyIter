@@ -1,10 +1,11 @@
 <?php
+declare(strict_types = 1);
 
 Namespace LazyChain;
 
 class LazyChain {
 	
-	private $iterator;
+	private \Iterator $iterator;
 
 	function __construct($source) {
 
