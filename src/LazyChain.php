@@ -9,14 +9,8 @@ class LazyChain {
 
 	function __construct($source) {
 
-		$array_gen= function ($array){
-			foreach($array as $elem){
-				yield $elem;
-			}
-		};
-
 		if(is_array($source)){
-			$this->iterator = $array_gen($source);
+			$this->iterator = new \ArrayIterator($source);
 		}
 
 		if($source instanceof \Iterator){
@@ -48,6 +42,13 @@ class LazyChain {
 		return false;
 	}
 
+	function chain(\Iterator $iterator) {
+		$newIterator = new \AppendIterator();
+		$newIterator->append($this->iterator);
+		$newIterator->append($iterator);
+		$this->iterator = $newIterator;
+		return $this;
+	}
 
 	function collect(){
 		$return = [];

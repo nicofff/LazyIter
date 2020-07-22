@@ -55,4 +55,15 @@ final class LazyChainTest extends TestCase
 
 		$this->assertTrue($any_number_divisible_by_42);
 	}
+
+	public function testChain(){
+		$iterator_a = new ArrayIterator(['a', 'b', 'c']);
+		$iterator_b = new ArrayIterator(['d', 'e', 'f']);
+		$chainedIterators = (new LazyChain($iterator_a))
+			->chain($iterator_b);
+		
+		$this->assertEquals($chainedIterators->collect(),['a', 'b', 'c','d', 'e', 'f']);
+		
+
+	}
 }
