@@ -67,6 +67,11 @@ class LazyChain {
 		return $this;
 	}
 
+	function enumerate(){
+		// TODO: figure out interface for subsequent iterators
+		// and what to do with the iterator keys
+	}
+
 	function filter($callable) {
 		$this->iterator = new Iterators\FilterIterator($this->iterator,$callable);
 		return $this;
