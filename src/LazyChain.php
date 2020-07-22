@@ -11,7 +11,6 @@ class LazyChain {
 
 		$array_gen= function ($array){
 			foreach($array as $elem){
-				echo "array ".$elem.PHP_EOL;
 				yield $elem;
 			}
 		};
@@ -25,20 +24,30 @@ class LazyChain {
 		}
 	}
 
-	function map($callable) {
-		$this->iterator = new Iterators\MapIterator($this->iterator,$callable);
-		return $this;
+	function all(bool $strict = true){
+		foreach($this->iterator as $elem){
+			if($elem === false){
+				return false;
+			}
+			if ($strict === false && $elem == false){
+				return false;
+			}
+		}
+		return true;
 	}
 
-	function filter($callable) {
-		$this->iterator = new Iterators\FilterIterator($this->iterator,$callable);
-		return $this;
+	function any(bool $strict = true){
+		foreach($this->iterator as $elem){
+			if($elem === true){
+				return true;
+			}
+			if ($strict === false && $elem == true){
+				return true;
+			}
+		}
+		return false;
 	}
 
-	function take($size) {
-		$this->iterator = new Iterators\TakeIterator($this->iterator,$size);
-		return $this;
-	}
 
 	function collect(){
 		$return = [];
@@ -47,4 +56,20 @@ class LazyChain {
 		}
 		return $return;
 	}
+
+	function filter($callable) {
+		$this->iterator = new Iterators\FilterIterator($this->iterator,$callable);
+		return $this;
+	}
+
+	function map($callable) {
+		$this->iterator = new Iterators\MapIterator($this->iterator,$callable);
+		return $this;
+	}
+
+	function take($size) {
+		$this->iterator = new Iterators\TakeIterator($this->iterator,$size);
+		return $this;
+	}
+
 }
