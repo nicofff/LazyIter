@@ -58,6 +58,10 @@ class LazyChain {
 		return $return;
 	}
 
+	function count(){
+		return iterator_count($this->iterator);
+	}
+
 	function filter($callable) {
 		$this->iterator = new Iterators\FilterIterator($this->iterator,$callable);
 		return $this;

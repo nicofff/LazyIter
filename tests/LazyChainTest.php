@@ -64,6 +64,15 @@ final class LazyChainTest extends TestCase
 		
 		$this->assertEquals($chainedIterators->collect(),['a', 'b', 'c','d', 'e', 'f']);
 		
+	}
 
+	public function testCount(){
+		$iterator_a = new ArrayIterator(['a', 'b', 'c']);
+		$iterator_b = new ArrayIterator(['d', 'e', 'f']);
+		$chainedIterators = (new LazyChain($iterator_a))
+			->chain($iterator_b);
+		
+		$this->assertEquals($chainedIterators->count(),6);
+		
 	}
 }
