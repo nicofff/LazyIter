@@ -14,5 +14,8 @@
         "psr-4": {
             "LazyChain\\": "src/"
         }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.33"
     }
 }

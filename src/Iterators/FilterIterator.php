@@ -4,6 +4,8 @@ declare(strict_types = 1);
 Namespace LazyChain\Iterators;
 
 class FilterIterator extends BaseIterator implements \Iterator {
+
+    private $callable;
     
     public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;

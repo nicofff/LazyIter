@@ -4,6 +4,9 @@ declare(strict_types = 1);
 Namespace LazyChain\Iterators;
 
 abstract class BaseIterator implements \Iterator {
+
+    protected \Iterator $previousIterator; 
+
     public function rewind() {
         $this->previousIterator->rewind();
     }
@@ -17,6 +20,6 @@ abstract class BaseIterator implements \Iterator {
     }
     
     public function key() {
-        throw new Exception("Values only");
+        throw new \Exception("Values only");
     }
 }

@@ -9,15 +9,15 @@ class LazyChain {
 
 	function __construct($source) {
 
-		function array_gen($array){
+		$array_gen= function ($array){
 			foreach($array as $elem){
 				echo "array ".$elem.PHP_EOL;
 				yield $elem;
 			}
-		}
+		};
 
 		if(is_array($source)){
-			$this->iterator = array_gen($source);
+			$this->iterator = $array_gen($source);
 		}
 
 		if($source instanceof \Iterator){

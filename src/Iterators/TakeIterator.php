@@ -5,6 +5,9 @@ Namespace LazyChain\Iterators;
 
 class TakeIterator extends BaseIterator implements \Iterator {
     
+    private int $size;
+    private int $currentPosition;
+
     public function __construct(\Iterator $previousIterator, int $size ) {
         $this->previousIterator = $previousIterator;
         $this->size = $size;

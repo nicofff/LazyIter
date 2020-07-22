@@ -5,6 +5,8 @@ Namespace LazyChain\Iterators;
 
 class MapIterator extends BaseIterator implements \Iterator {
 
+    private $callable;
+    
     public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
         $this->callable = $callable;
