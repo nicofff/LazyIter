@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 use LazyChain\LazyChain;
 
-final class BasicTest extends TestCase
+final class LazyChainTest extends TestCase
 {
 	public function testAll(): void
 	{
