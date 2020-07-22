@@ -2,9 +2,12 @@
 declare(strict_types = 1);
 
 Namespace LazyChain\Iterators;
-
+/**
+ * @template T
+ */
 abstract class BaseIterator implements \Iterator {
 
+    /** @var \Iterator<T> $previousIterator */
     protected \Iterator $previousIterator; 
 
     public function rewind() {

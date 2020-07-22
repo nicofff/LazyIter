@@ -75,4 +75,5 @@ final class LazyChainTest extends TestCase
 		$this->assertEquals($first_five,['a', 'b', 'c','a', 'b']);
 		
 	}
+
 }

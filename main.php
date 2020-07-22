@@ -7,10 +7,13 @@ function foo($i){
 	return $i;
 }
 
+/**
+ * @return \Iterator<int>
+ */
 function endless_generator(){
 	$i = 0;
 	while(true){
-		yield foo($i++);
+		yield $i++;
 	}
 }
 

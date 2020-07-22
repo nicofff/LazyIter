@@ -2,11 +2,17 @@
 declare(strict_types = 1);
 
 Namespace LazyChain;
-
+/**
+ * @template T
+ */
 class LazyChain {
 	
+	/** @var \Iterator<T> */
 	private \Iterator $iterator;
 
+	/**
+	 * @param array<T> | \Iterator<T> $source
+	 */
 	function __construct($source) {
 
 		if(is_array($source)){
@@ -16,6 +22,8 @@ class LazyChain {
 		if($source instanceof \Iterator){
 			$this->iterator = $source;
 		}
+
+		throw new \Exception("Invalid source for LazyChain");
 	}
 
 	function all(bool $strict = true){
@@ -72,6 +80,14 @@ class LazyChain {
 		// and what to do with the iterator keys
 	}
 
+	/*function find(callable $callable){
+		$this->filter($callable);
+		return $this->current;
+	}*/
+
+	/**
+	 * @param callable(T): bool $callable
+	 */
 	function filter($callable) {
 		$this->iterator = new Iterators\FilterIterator($this->iterator,$callable);
 		return $this;

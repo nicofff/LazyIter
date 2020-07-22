@@ -2,11 +2,20 @@
 declare(strict_types = 1);
 
 Namespace LazyChain\Iterators;
-
+/**
+ * @template T
+ */
 class FilterIterator extends BaseIterator implements \Iterator {
 
+    /**
+     * @var param callable(T):bool $callable
+     */
     private $callable;
-    
+
+    /**
+     * @param \Iterator<T> $previousIterator
+     * @param callable(T):bool $callable
+     */
     public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
         $this->callable = $callable;
