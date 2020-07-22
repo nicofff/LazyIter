@@ -62,6 +62,11 @@ class LazyChain {
 		return iterator_count($this->iterator);
 	}
 
+	function cycle(){
+		$this->iterator = new \InfiniteIterator($this->iterator);
+		return $this;
+	}
+
 	function filter($callable) {
 		$this->iterator = new Iterators\FilterIterator($this->iterator,$callable);
 		return $this;

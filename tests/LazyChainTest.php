@@ -68,11 +68,11 @@ final class LazyChainTest extends TestCase
 
 	public function testCount(){
 		$iterator_a = new ArrayIterator(['a', 'b', 'c']);
-		$iterator_b = new ArrayIterator(['d', 'e', 'f']);
-		$chainedIterators = (new LazyChain($iterator_a))
-			->chain($iterator_b);
-		
-		$this->assertEquals($chainedIterators->count(),6);
+		$infiniteIterator = (new LazyChain($iterator_a))
+			->cycle();
+			
+		$first_five = $infiniteIterator->take(5)->collect();
+		$this->assertEquals($first_five,['a', 'b', 'c','a', 'b']);
 		
 	}
 }
