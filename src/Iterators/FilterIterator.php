@@ -4,6 +4,8 @@ declare(strict_types = 1);
 Namespace LazyChain\Iterators;
 /**
  * @template T
+ * @phpstan-implements \Iterator<mixed,T>
+ * @phpstan-extends BaseIterator<T>
  */
 class FilterIterator extends BaseIterator implements \Iterator {
 
@@ -21,7 +23,7 @@ class FilterIterator extends BaseIterator implements \Iterator {
         $this->callable = $callable;            
     }
 
-    public function next() {
+    public function next(): void {
         $this->previousIterator->next();
         while(
             $this->previousIterator->valid() && 
@@ -31,11 +33,14 @@ class FilterIterator extends BaseIterator implements \Iterator {
         }
     }
 
+    /**
+     * @return T
+     */
     public function current() {
         return $this->previousIterator->current();
     }
 
-    public function rewind() {
+    public function rewind(): void {
         $this->previousIterator->rewind();
         if (!($this->callable)($this->previousIterator->current())){
             $this->next();

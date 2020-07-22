@@ -5,24 +5,29 @@ Namespace LazyChain\Iterators;
 /**
  * @template T
  * @template U
+ * @phpstan-implements \Iterator<mixed,T>
+ * @phpstan-extends BaseIterator<T>
  */
 class MapIterator extends BaseIterator implements \Iterator {
 
     /**
-     * @var callable(T): U $callable
+     * @var callable(U): T $callable
      */
     private $callable;
+
+    /** @var \Iterator<U> $previousIterator */
+    protected \Iterator $previousIterator; 
     
     /**
-     * @param \Iterator<T> $previousIterator
-     * @param callable(T): U $callable
+     * @param \Iterator<U> $previousIterator
+     * @param callable(U): T $callable
      */
     public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
         $this->callable = $callable;
     }
 
-    /** @return U */
+    /** @return T */
     public function current() {
         return ($this->callable)($this->previousIterator->current());
     }

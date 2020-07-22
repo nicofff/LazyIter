@@ -29,7 +29,7 @@ class LazyChain {
 		throw new \Exception("Invalid source for LazyChain");
 	}
 
-	function all(bool $strict = true){
+	function all(bool $strict = true): bool{
 		foreach($this->iterator as $elem){
 			if($elem === false){
 				return false;
@@ -41,7 +41,7 @@ class LazyChain {
 		return true;
 	}
 
-	function any(bool $strict = true){
+	function any(bool $strict = true): bool{
 		foreach($this->iterator as $elem){
 			if($elem === true){
 				return true;
@@ -53,14 +53,21 @@ class LazyChain {
 		return false;
 	}
 
-	function chain(\Iterator $iterator) {
+	/**
+	 * @param \Iterator<T> $iterator
+	 * @return LazyChain<T>
+	 */
+	function chain(\Iterator $iterator): LazyChain  {
 		$newIterator = new \AppendIterator();
 		$newIterator->append($this->iterator);
 		$newIterator->append($iterator);
 		return new LazyChain($newIterator);
 	}
 
-	function collect(){
+	/**
+	 * @return array<T>
+	 */
+	function collect() : array{
 		$return = [];
 		foreach($this->iterator as $elem){
 			$return[] = $elem;
@@ -68,18 +75,21 @@ class LazyChain {
 		return $return;
 	}
 
-	function count(){
+	function count(): int {
 		return iterator_count($this->iterator);
 	}
 
-	function cycle(){
+	/**
+	 * @return LazyChain<T>
+	 */
+	function cycle(): LazyChain{
 		return new LazyChain(new \InfiniteIterator($this->iterator));
 	}
 
-	function enumerate(){
-		// TODO: figure out interface for subsequent iterators
-		// and what to do with the iterator keys
-	}
+	// function enumerate(){
+	// 	// TODO: figure out interface for subsequent iterators
+	// 	// and what to do with the iterator keys
+	// }
 
 	/*function find(callable $callable){
 		$this->filter($callable);
@@ -90,7 +100,7 @@ class LazyChain {
 	 * @param callable(T): bool $callable
 	 * @return LazyChain<T>
 	 */
-	function filter($callable) {
+	function filter($callable): LazyChain {
 		return new LazyChain(new Iterators\FilterIterator($this->iterator,$callable));
 	}
 
@@ -99,11 +109,15 @@ class LazyChain {
 	 * @param callable(T): U $callable
 	 * @return LazyChain<U>
 	 */
-	function map($callable) {
+	function map($callable): LazyChain {
 		return new LazyChain(new Iterators\MapIterator($this->iterator,$callable));
 	}
 
-	function take($size) {
+	/**
+	 * @param int $size
+	 * @return LazyChain<T>
+	 */
+	function take($size): LazyChain {
 		return new LazyChain(new Iterators\TakeIterator($this->iterator,$size));
 	}
 

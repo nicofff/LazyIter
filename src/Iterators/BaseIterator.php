@@ -4,25 +4,31 @@ declare(strict_types = 1);
 Namespace LazyChain\Iterators;
 /**
  * @template T
+ * @phpstan-implements \Iterator<mixed,T>
  */
 abstract class BaseIterator implements \Iterator {
 
     /** @var \Iterator<T> $previousIterator */
     protected \Iterator $previousIterator; 
 
-    public function rewind() {
+    public function rewind(): void {
         $this->previousIterator->rewind();
     }
     
-    public function next() {
+    public function next(): void {
         $this->previousIterator->next();
     }
 
-    public function valid() {
+    public function valid(): bool {
         return $this->previousIterator->valid();
     }
-    
-    public function key() {
+
+    /**
+     * @return T
+     */
+    abstract function current();
+
+    public function key(): mixed {
         throw new \Exception("Values only");
     }
 }
