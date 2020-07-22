@@ -35,3 +35,9 @@ Array
     [3] => 36
 )
 ```
+
+# Design goals
+
+1. Be lazy
+2. Have a similar interface to Rust's Iterator
+3. Leverage static code analyzers to validate type correctness

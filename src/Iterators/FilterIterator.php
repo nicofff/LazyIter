@@ -8,7 +8,7 @@ Namespace LazyChain\Iterators;
 class FilterIterator extends BaseIterator implements \Iterator {
 
     /**
-     * @var param callable(T):bool $callable
+     * @var callable(T):bool $callable
      */
     private $callable;
 
@@ -18,7 +18,7 @@ class FilterIterator extends BaseIterator implements \Iterator {
      */
     public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
-        $this->callable = $callable;
+        $this->callable = $callable;            
     }
 
     public function next() {
@@ -33,6 +33,13 @@ class FilterIterator extends BaseIterator implements \Iterator {
 
     public function current() {
         return $this->previousIterator->current();
+    }
+
+    public function rewind() {
+        $this->previousIterator->rewind();
+        if (!($this->callable)($this->previousIterator->current())){
+            $this->next();
+        }
     }
 
 }

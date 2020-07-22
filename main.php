@@ -19,10 +19,9 @@ function endless_generator(){
 
 $all_numbers = endless_generator();
 
-$first_4_even_numbers_squared = (new LazyChain($all_numbers))
-	->filter(fn($n) => $n % 2 == 0 )
-	->map(fn($n) => pow($n,2) + 1 )
-	->take(4)
+$foo = 
+	(new LazyChain(['uno', 'dos', 'tres', 'cuatro', 'cinco']))
+	->filter(fn(string $str) : bool => strlen($str) % 2 == 0)
 	->collect();
 
-print_r($first_4_even_numbers_squared);
+print_r($foo);

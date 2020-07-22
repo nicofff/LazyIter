@@ -17,12 +17,15 @@ class LazyChain {
 
 		if(is_array($source)){
 			$this->iterator = new \ArrayIterator($source);
+			return;
 		}
 
 		if($source instanceof \Iterator){
 			$this->iterator = $source;
+			return;
 		}
-
+		// Next line is unreachable, if the constructor is called correctly
+		// @phpstan-ignore-next-line
 		throw new \Exception("Invalid source for LazyChain");
 	}
 
@@ -54,8 +57,7 @@ class LazyChain {
 		$newIterator = new \AppendIterator();
 		$newIterator->append($this->iterator);
 		$newIterator->append($iterator);
-		$this->iterator = $newIterator;
-		return $this;
+		return new LazyChain($newIterator);
 	}
 
 	function collect(){
@@ -71,8 +73,7 @@ class LazyChain {
 	}
 
 	function cycle(){
-		$this->iterator = new \InfiniteIterator($this->iterator);
-		return $this;
+		return new LazyChain(new \InfiniteIterator($this->iterator));
 	}
 
 	function enumerate(){
@@ -87,20 +88,23 @@ class LazyChain {
 
 	/**
 	 * @param callable(T): bool $callable
+	 * @return LazyChain<T>
 	 */
 	function filter($callable) {
-		$this->iterator = new Iterators\FilterIterator($this->iterator,$callable);
-		return $this;
+		return new LazyChain(new Iterators\FilterIterator($this->iterator,$callable));
 	}
 
+	/**
+	 * @template U
+	 * @param callable(T): U $callable
+	 * @return LazyChain<U>
+	 */
 	function map($callable) {
-		$this->iterator = new Iterators\MapIterator($this->iterator,$callable);
-		return $this;
+		return new LazyChain(new Iterators\MapIterator($this->iterator,$callable));
 	}
 
 	function take($size) {
-		$this->iterator = new Iterators\TakeIterator($this->iterator,$size);
-		return $this;
+		return new LazyChain(new Iterators\TakeIterator($this->iterator,$size));
 	}
 
 }
