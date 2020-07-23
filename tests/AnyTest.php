@@ -7,13 +7,13 @@ final class AnyTest extends TestCase {
 	public function testFalseCase(): void
 	{
 		$all_false = [false,false,false,false];            
-		$this->assertFalse((new LazyChain($all_false))->any());
+		$this->assertFalse(LazyChain::fromArray($all_false)->any());
     }
 
     public function testAllTrue(): void
 	{
 		$a_true = [false,false,false,true]; 
-		$this->assertTrue((new LazyChain($a_true))->any());
+		$this->assertTrue(LazyChain::fromArray($a_true)->any());
     }
     
     public function testShortCircuit(): void {
@@ -34,6 +34,13 @@ final class AnyTest extends TestCase {
     }
         
     public function testEmpty(): void {
-        $this->assertFalse((new LazyChain([]))->any());
+        $this->assertFalse(LazyChain::fromArray([])->any());
+	}
+	
+	public function testCallable(): void {
+        $this->assertTrue(
+			LazyChain::fromArray([1,3,6,7])
+			->any(fn($x) => $x % 2 == 0)
+		);
     }
 }

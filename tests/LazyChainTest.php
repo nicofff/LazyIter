@@ -5,17 +5,8 @@ use LazyChain\LazyChain;
 final class LazyChainTest extends TestCase
 {
 
-	public function testChain(){
-		$iterator_a = new ArrayIterator(['a', 'b', 'c']);
-		$iterator_b = new ArrayIterator(['d', 'e', 'f']);
-		$chainedIterators = (new LazyChain($iterator_a))
-			->chain($iterator_b);
-		
-		$this->assertEquals($chainedIterators->collect(),['a', 'b', 'c','d', 'e', 'f']);
-		
-	}
 
-	public function testCount(){
+	public function testCount(): void {
 		$iterator_a = new ArrayIterator(['a', 'b', 'c']);
 		$infiniteIterator = (new LazyChain($iterator_a))
 			->cycle();
