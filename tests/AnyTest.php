@@ -15,7 +15,7 @@ final class AnyTest extends TestCase {
 		$a_true = [false,false,false,true]; 
 		$this->assertTrue(LazyChain::fromArray($a_true)->any());
     }
-    
+	
     public function testShortCircuit(): void {
         $all_numbers_generator = function (){
 			$i = 0;
@@ -24,10 +24,11 @@ final class AnyTest extends TestCase {
 			}
 		};
 
+		/** @var Iterator<int> $all_numbers */
 		$all_numbers = $all_numbers_generator();
 
 		$any_number_divisible_by_42  = (new LazyChain($all_numbers))
-			->map(fn($n) => $n % 42 == 0)
+			->map(fn(int $n) => $n % 42 == 0)
 			->any();
 
 		$this->assertTrue($any_number_divisible_by_42);

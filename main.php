@@ -15,9 +15,9 @@ function endless_generator(){
 
 $all_numbers = endless_generator();
 
-$first_4_even_numbers_squared = (new LazyChain($all_numbers))
+$first_4_even_numbers_squared = LazyChain::fromArray([1,2,3,4,5])
 	->map(fn(int $n) => chr($n) )
-	->filter(fn(int $n) => $n % 2 == 0 )
+	//->filter(fn(int $n) => $n % 2 == 0 )
 	->take(4)
 	->collect();
 

@@ -125,16 +125,6 @@ class LazyChain {
 		return new LazyChain(new \InfiniteIterator($this->iterator));
 	}
 
-	// function enumerate(){
-	// 	// TODO: figure out interface for subsequent iterators
-	// 	// and what to do with the iterator keys
-	// }
-
-	/*function find(callable $callable){
-		$this->filter($callable);
-		return $this->current;
-	}*/
-
 	/**
 	 * Creates an iterator which uses a callable to determine if an element should be yielded.
 	 * @param callable(T): bool $callable
@@ -142,6 +132,26 @@ class LazyChain {
 	 */
 	function filter($callable): LazyChain {
 		return new LazyChain(new Iterators\FilterIterator($this->iterator,$callable));
+	}
+
+	/**
+	 * An iterator method that applies a function, producing a single, final value.  
+	 * fold() takes two arguments: an initial value, and a closure with two arguments: an 'accumulator', and an element. The closure returns the value that the accumulator should have for the next iteration.   
+	 * After applying this closure to every element of the iterator, fold() returns the accumulator.  
+	 * The initial value is the value the accumulator will have on the first call.  
+	 * This operation is sometimes called 'reduce' or 'inject'.  
+	 * Folding is useful whenever you have a collection of something, and want to produce a single value from it.  
+	 * Note: fold(), and similar methods that traverse the entire iterator, may not terminate for infinite iterators  
+	 * @template Acc
+	 * @param Acc $acumulator
+	 * @param callable(Acc $acc, T $item): Acc $callable
+	 * @return Acc
+	 */
+	function fold($acumulator, callable $callable){
+		foreach($this->iterator as $elem){
+			$acumulator = $callable($acumulator,$elem);
+		}
+		return $acumulator;
 	}
 
 	/**
