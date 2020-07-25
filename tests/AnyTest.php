@@ -17,7 +17,7 @@ final class AnyTest extends TestCase {
     }
 	
     public function testShortCircuit(): void {
-        $all_numbers_generator = function (): Generator{
+        $all_numbers_generator = function (): Generator {
 			$i = 0;
 			while(true){
 				yield $i++;
