@@ -23,7 +23,8 @@
         "phpstan/phpstan-phpunit": "^0.12.13"
     },
     "scripts": {
-		"test:phpstan": "phpstan analyse",
+        "test:phpstan": "phpstan analyse",
+        "test:phpstan:types": "phpstan analyse -c phpstan.types.neon",
 		"test:phpunit": "phpunit tests/",
         "test": "composer test:phpstan && composer test:phpunit"
 	}
