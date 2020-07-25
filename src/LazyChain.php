@@ -83,9 +83,9 @@ class LazyChain {
 	}
 
 	/**
-	 * Attach another iterator at the end of the current one
-	 * chain() will return a new iterator which will first iterate over values from the current iterator and then over values from the passed iterator.
-	 * In other words, it links two iterators together, in a chain. 🔗
+	 * Attach another iterator at the end of the current one  
+	 * chain() will return a new iterator which will first iterate over values from the current iterator and then over values from the passed iterator.  
+	 * In other words, it links two iterators together, in a chain. 🔗  
 	 * @param \Iterator<T> $iterator
 	 * @return LazyChain<T>
 	 */
@@ -97,6 +97,7 @@ class LazyChain {
 	}
 
 	/**
+	 * Transforms an iterator into an array.
 	 * @return array<T>
 	 */
 	function collect() : array{
@@ -107,11 +108,17 @@ class LazyChain {
 		return $return;
 	}
 
+	/**
+	 * Consumes the iterator, counting the number of iterations and returning it.  
+	 * This method does no guarding agains overflow or infinite iterators  
+	 * Calling this after after cycle() will hang forever  
+	 */
 	function count(): int {
 		return iterator_count($this->iterator);
 	}
 
 	/**
+	 * Repeats the iterator endlessly.
 	 * @return LazyChain<T>
 	 */
 	function cycle(): LazyChain{
@@ -129,6 +136,7 @@ class LazyChain {
 	}*/
 
 	/**
+	 * Creates an iterator which uses a callable to determine if an element should be yielded.
 	 * @param callable(T): bool $callable
 	 * @return LazyChain<T>
 	 */
@@ -137,6 +145,9 @@ class LazyChain {
 	}
 
 	/**
+	 * Takes a closure and creates an iterator which calls that callable on each element.  
+	 * map() transforms one iterator into another, by means of its callable argument. It produces a new iterator which calls this closure on each element of the original iterator.  
+	 * If you are good at thinking in types, you can think of map() like this: If you have an iterator that gives you elements of some type A, and you want an iterator of some other type B, you can use map(), passing a callable that takes an A and returns a B.
 	 * @template U
 	 * @param callable(T): U $callable
 	 * @return LazyChain<U>
@@ -146,7 +157,7 @@ class LazyChain {
 	}
 
 	/**
-	 * Blah
+	 * Creates an iterator that yields its first n elements.
 	 * @param int $size
 	 * @return LazyChain<T>
 	 */
