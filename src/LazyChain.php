@@ -157,12 +157,22 @@ class LazyChain {
 	}
 
 	/**
+	 * Creates an iterator that skips the first n elements of the previous iterator.  
+	 * @param int $skip
+	 * @return LazyChain<T>
+	 */
+	function skip($skip): LazyChain {
+		return new LazyChain(new Iterators\SkipIterator($this->iterator,$skip));
+	}
+
+	/**
 	 * Creates an iterator that yields its first n elements.
+	 * If less than $size elements are available, take will limit itself to the size of the underlying iterator:
 	 * @param int $size
 	 * @return LazyChain<T>
 	 */
 	function take($size): LazyChain {
-		return new LazyChain(new Iterators\TakeIterator($this->iterator,$size));
+		return new LazyChain(new \LimitIterator($this->iterator,0,$size));
 	}
 
 }

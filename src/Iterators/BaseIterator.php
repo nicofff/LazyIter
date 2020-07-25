@@ -28,7 +28,10 @@ abstract class BaseIterator implements \Iterator {
      */
     abstract function current();
 
-    public function key(): mixed {
-        throw new \Exception("Values only");
+    /**
+     * @return mixed
+     */
+    public function key(){
+        return $this->previousIterator->key();
     }
 }
