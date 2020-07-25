@@ -155,6 +155,16 @@ class LazyChain {
 	}
 
 	/**
+	 * Calls a closure on each element of an iterator.
+	 * @param callable(T):mixed $callable
+	 */
+	function for_each(callable $callable): void {
+		foreach($this->iterator as $elem){
+			$callable($elem);
+		}
+	}
+
+	/**
 	 * Takes a closure and creates an iterator which calls that callable on each element.  
 	 * map() transforms one iterator into another, by means of its callable argument. It produces a new iterator which calls this closure on each element of the original iterator.  
 	 * If you are good at thinking in types, you can think of map() like this: If you have an iterator that gives you elements of some type A, and you want an iterator of some other type B, you can use map(), passing a callable that takes an A and returns a B.
