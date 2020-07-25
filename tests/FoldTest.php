@@ -34,18 +34,4 @@ final class FoldTest extends TestCase {
 			,[2,3,4,5,6,7,8,9]
 		);
 	}
-	
-	// TODO: Revisit this, see if we can get more miningful type errors
-	// public function testTypes(): void
-	// {
-	// 	/** @var int[] $arr */ 
-	// 	$arr = [2,4,6,8];
-	// 	self::assertEquals(
-	// 		LazyChain::fromArray($arr)
-	// 		->fold([],function(int $acc,int $n): int{
-	// 			return $acc + $n;
-	// 		})
-	// 		,[2,3,4,5,6,7,8,9]
-	// 	);
-    // }
 }
