@@ -12,7 +12,7 @@ final class LazyChainTest extends TestCase
 			->cycle();
 			
 		$first_five = $infiniteIterator->take(5)->collect();
-		$this->assertEquals($first_five,['a', 'b', 'c','a', 'b']);
+		self::assertEquals($first_five,['a', 'b', 'c','a', 'b']);
 		
 	}
 

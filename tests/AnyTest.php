@@ -7,17 +7,17 @@ final class AnyTest extends TestCase {
 	public function testFalseCase(): void
 	{
 		$all_false = [false,false,false,false];            
-		$this->assertFalse(LazyChain::fromArray($all_false)->any());
+		self::assertFalse(LazyChain::fromArray($all_false)->any());
     }
 
     public function testAllTrue(): void
 	{
 		$a_true = [false,false,false,true]; 
-		$this->assertTrue(LazyChain::fromArray($a_true)->any());
+		self::assertTrue(LazyChain::fromArray($a_true)->any());
     }
 	
     public function testShortCircuit(): void {
-        $all_numbers_generator = function (){
+        $all_numbers_generator = function (): Generator{
 			$i = 0;
 			while(true){
 				yield $i++;
@@ -31,15 +31,15 @@ final class AnyTest extends TestCase {
 			->map(fn(int $n) => $n % 42 == 0)
 			->any();
 
-		$this->assertTrue($any_number_divisible_by_42);
+		self::assertTrue($any_number_divisible_by_42);
     }
         
     public function testEmpty(): void {
-        $this->assertFalse(LazyChain::fromArray([])->any());
+        self::assertFalse(LazyChain::fromArray([])->any());
 	}
 	
 	public function testCallable(): void {
-        $this->assertTrue(
+        self::assertTrue(
 			LazyChain::fromArray([1,3,6,7])
 			->any(fn($x) => $x % 2 == 0)
 		);

@@ -6,7 +6,7 @@ final class FoldTest extends TestCase {
 
     public function testBasicFold(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([2,4,6,8])
 			->fold(0,fn(int $acc, int $n): int => $acc + $n)
 			,20
@@ -15,7 +15,7 @@ final class FoldTest extends TestCase {
 	
 	public function testStrings(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([2,4,6,8])
 			->fold("",fn(string $acc,int $n): string => $acc . $n)
 			,"2468"
@@ -24,7 +24,7 @@ final class FoldTest extends TestCase {
 
 	public function testArray(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([2,4,6,8])
 			->fold([],function(array $acc,int $n): array{
 				$acc[] = $n;
@@ -40,7 +40,7 @@ final class FoldTest extends TestCase {
 	// {
 	// 	/** @var int[] $arr */ 
 	// 	$arr = [2,4,6,8];
-	// 	$this->assertEquals(
+	// 	self::assertEquals(
 	// 		LazyChain::fromArray($arr)
 	// 		->fold([],function(int $acc,int $n): int{
 	// 			return $acc + $n;

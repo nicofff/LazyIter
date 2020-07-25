@@ -11,7 +11,7 @@ final class ChainTest extends TestCase {
 		$chainedIterators = (new LazyChain($iterator_a))
 			->chain($iterator_b);
 		
-		$this->assertEquals($chainedIterators->collect(),['a', 'b', 'c','d', 'e', 'f']);
+		self::assertEquals($chainedIterators->collect(),['a', 'b', 'c','d', 'e', 'f']);
 	}
 	
 	public function testEmpty(): void
@@ -21,7 +21,7 @@ final class ChainTest extends TestCase {
 		$chainedIterators = (new LazyChain($iterator_a))
 			->chain($iterator_b);
 		
-		$this->assertEquals($chainedIterators->collect(),['d', 'e', 'f']);
+		self::assertEquals($chainedIterators->collect(),['d', 'e', 'f']);
     }
         
     public function testbothEmpty(): void {
@@ -30,6 +30,6 @@ final class ChainTest extends TestCase {
 		$chainedIterators = (new LazyChain($iterator_a))
 			->chain($iterator_b);
 		
-		$this->assertEquals($chainedIterators->collect(),[]);
+		self::assertEquals($chainedIterators->collect(),[]);
 	}
 }

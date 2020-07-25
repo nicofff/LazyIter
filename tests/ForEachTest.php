@@ -8,8 +8,9 @@ final class ForEachTest extends TestCase {
 	{	
 		$this->expectException(\Exception::class);
 		$this->expectExceptionMessage("Found 8");
+		
 		LazyChain::fromArray([2,4,6,8])
-		->for_each(function(int $n){
+		->for_each(function(int $n): void{
 			if($n === 8){
 				throw new \Exception("Found 8");
 			}

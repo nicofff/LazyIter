@@ -6,7 +6,7 @@ final class SkipTest extends TestCase {
 
     public function testBasicSkip(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([2,4,6,8])
 			->skip(2)
 			->collect()
@@ -15,7 +15,7 @@ final class SkipTest extends TestCase {
 	
 	public function testEmpty(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([])
 			->skip(2)
 			->collect()
@@ -24,7 +24,7 @@ final class SkipTest extends TestCase {
 
 	public function testSkippingMoreThanAvailable(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([1,2])
 			->skip(10)
 			->collect()
@@ -32,7 +32,7 @@ final class SkipTest extends TestCase {
 	}
 	
     public function testInfiniteIterator(): void {
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([2,4,6,8])
 			->cycle()
 			->skip(6)

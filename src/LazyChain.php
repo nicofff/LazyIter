@@ -19,6 +19,8 @@ class LazyChain {
 	 */
 	function __construct(\Iterator $sourceIterator) {
 
+		// This is always true, if the constructor is called correctly
+		// @phpstan-ignore-next-line
 		if($sourceIterator instanceof \Iterator){
 			$this->iterator = $sourceIterator;
 			return;

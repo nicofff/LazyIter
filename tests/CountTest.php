@@ -6,16 +6,16 @@ final class CountTest extends TestCase {
 
     public function testBasicCount(): void
 	{
-		$this->assertEquals(LazyChain::fromArray([2,4,6,8])->count(),4);
+		self::assertEquals(LazyChain::fromArray([2,4,6,8])->count(),4);
 	}
 	
 	public function testEmpty(): void
 	{
-		$this->assertEquals(LazyChain::fromArray([])->count(),0);
+		self::assertEquals(LazyChain::fromArray([])->count(),0);
     }
     // This never ends, as expected 
     // public function testInfinite(): void {
-	// 	$this->assertEquals(
+	// 	self::assertEquals(
 	// 		LazyChain::fromArray([2,4,6,8])
 	// 		->cycle()->count()
 	// 		,0

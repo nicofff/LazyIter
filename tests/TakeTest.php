@@ -6,7 +6,7 @@ final class TakeTest extends TestCase {
 
     public function testBasicTake(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([2,4,6,8])
 			->take(2)
 			->collect()
@@ -15,7 +15,7 @@ final class TakeTest extends TestCase {
 	
 	public function testEmpty(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([])
 			->take(2)
 			->collect()
@@ -24,7 +24,7 @@ final class TakeTest extends TestCase {
 
 	public function testTakingMoreThanAvailable(): void
 	{
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([1,2])
 			->take(10)
 			->collect()
@@ -32,7 +32,7 @@ final class TakeTest extends TestCase {
 	}
 	
     public function testInfiniteIterator(): void {
-		$this->assertEquals(
+		self::assertEquals(
 			LazyChain::fromArray([2,4,6,8])
 			->cycle()
 			->take(6)
