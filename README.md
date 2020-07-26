@@ -38,6 +38,6 @@ Array
 
 # Design goals
 
-1. Be lazy
+1. Be lazy (as in Lazily evaluated)
 2. Have a similar interface to Rust's Iterator
 3. Leverage static code analyzers to validate type correctness
