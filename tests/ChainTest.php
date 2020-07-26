@@ -10,7 +10,6 @@ final class ChainTest extends TestCase {
 		$iterator_b = new ArrayIterator(['d', 'e', 'f']);
 		$chainedIterators = (new LazyChain($iterator_a))
 			->chain($iterator_b);
-		
 		self::assertEquals($chainedIterators->collect(),['a', 'b', 'c','d', 'e', 'f']);
 	}
 	

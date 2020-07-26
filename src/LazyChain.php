@@ -103,12 +103,13 @@ class LazyChain {
 
 	/**
 	 * Transforms an iterator into an array.
-	 * @return array<TKey,TValue>
+	 * @return array<int,TValue>
 	 */
 	function collect() : array{
 		$return = [];
+		$ix = 0;
 		foreach($this->iterator as $key => $elem){
-			$return[$key] = $elem;
+			$return[$ix++] = $elem;
 		}
 		return $return;
 
