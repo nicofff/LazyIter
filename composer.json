@@ -1,5 +1,5 @@
 {
-    "name": "nicofff/LazyIter",
+    "name": "nicofff/lazy-iter",
     "description": "Lazy array function chains inspired in Rust",
     "type": "library",
     "license": "MIT",
