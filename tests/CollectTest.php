@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-use LazyChain\LazyChain;
+use LazyIter\LazyIter;
 
 final class CollectTest extends TestCase {
 
     public function testBasicCollect(): void
 	{
-		self::assertEquals(LazyChain::fromArray([2,4,6,8])->collect(),[2,4,6,8]);
+		self::assertEquals(LazyIter::fromArray([2,4,6,8])->collect(),[2,4,6,8]);
 	}
 	
 	/**
@@ -21,6 +21,6 @@ final class CollectTest extends TestCase {
 			"seis" => 6,
 			"ocho" => 8
 		];
-		self::assertEquals(LazyChain::fromArray($arr)->collect(),[2,4,6,8]);
+		self::assertEquals(LazyIter::fromArray($arr)->collect(),[2,4,6,8]);
     }
 }

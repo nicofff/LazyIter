@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-Namespace LazyChain;
+Namespace LazyIter;
 /**
  * @template TKey
  * @template TValue
@@ -10,7 +10,7 @@ Namespace LazyChain;
  * @link https://doc.rust-lang.org/std/iter/trait.Iterator.html
  * Methods docs partially borrowed from above
  */
-class LazyChain {
+class LazyIter {
 	
 	/** @var \Iterator<TKey,TValue> */
 	private \Iterator $iterator;
@@ -28,17 +28,17 @@ class LazyChain {
 		}
 		// Next line is unreachable, if the constructor is called correctly
 		// @phpstan-ignore-next-line
-		throw new \Exception("Invalid source for LazyChain");
+		throw new \Exception("Invalid source for LazyIter");
 	}
 
 	/**
 	 * @template AKey
 	 * @template AValue
 	 * @param array<AKey,AValue> $sourceArray
-	 * @return LazyChain<AKey,AValue>
+	 * @return LazyIter<AKey,AValue>
 	 */
-	static function fromArray(array $sourceArray): LazyChain {
-		return new LazyChain(new \ArrayIterator($sourceArray));
+	static function fromArray(array $sourceArray): LazyIter {
+		return new LazyIter(new \ArrayIterator($sourceArray));
 	}
 
 	/**
@@ -92,13 +92,13 @@ class LazyChain {
 	 * chain() will return a new iterator which will first iterate over values from the current iterator and then over values from the passed iterator.  
 	 * In other words, it links two iterators together, in a chain. 🔗  
 	 * @param \Iterator<TKey,TValue> $iterator
-	 * @return LazyChain<TKey,TValue>
+	 * @return LazyIter<TKey,TValue>
 	 */
-	function chain(\Iterator $iterator): LazyChain  {
+	function chain(\Iterator $iterator): LazyIter  {
 		$newIterator = new \AppendIterator();
 		$newIterator->append($this->iterator);
 		$newIterator->append($iterator);
-		return new LazyChain($newIterator);
+		return new LazyIter($newIterator);
 	}
 
 	/**
@@ -126,19 +126,19 @@ class LazyChain {
 
 	/**
 	 * Repeats the iterator endlessly.
-	 * @return LazyChain<TKey,TValue>
+	 * @return LazyIter<TKey,TValue>
 	 */
-	function cycle(): LazyChain{
-		return new LazyChain(new \InfiniteIterator($this->iterator));
+	function cycle(): LazyIter{
+		return new LazyIter(new \InfiniteIterator($this->iterator));
 	}
 
 	/**
 	 * Creates an iterator which uses a callable to determine if an element should be yielded.
 	 * @param callable(TValue): bool $callable
-	 * @return LazyChain<TKey,TValue>
+	 * @return LazyIter<TKey,TValue>
 	 */
-	function filter($callable): LazyChain {
-		return new LazyChain(new Iterators\FilterIterator($this->iterator,$callable));
+	function filter($callable): LazyIter {
+		return new LazyIter(new Iterators\FilterIterator($this->iterator,$callable));
 	}
 
 	/**
@@ -190,10 +190,10 @@ class LazyChain {
 	 * If you are good at thinking in types, you can think of map() like this: If you have an iterator that gives you elements of some type A, and you want an iterator of some other type B, you can use map(), passing a callable that takes an A and returns a B.
 	 * @template UValue
 	 * @param callable(TValue): UValue $callable
-	 * @return LazyChain<TKey,UValue>
+	 * @return LazyIter<TKey,UValue>
 	 */
-	function map($callable): LazyChain {
-		return new LazyChain(new Iterators\MapIterator($this->iterator,$callable));
+	function map($callable): LazyIter {
+		return new LazyIter(new Iterators\MapIterator($this->iterator,$callable));
 	}
 
 	/**
@@ -215,20 +215,20 @@ class LazyChain {
 	/**
 	 * Creates an iterator that skips the first n elements of the previous iterator.  
 	 * @param int $skip
-	 * @return LazyChain<TKey,TValue>
+	 * @return LazyIter<TKey,TValue>
 	 */
-	function skip($skip): LazyChain {
-		return new LazyChain(new Iterators\SkipIterator($this->iterator,$skip));
+	function skip($skip): LazyIter {
+		return new LazyIter(new Iterators\SkipIterator($this->iterator,$skip));
 	}
 
 	/**
 	 * Creates an iterator that yields its first n elements.
 	 * If less than $size elements are available, take will limit itself to the size of the underlying iterator:
 	 * @param int $size
-	 * @return LazyChain<TKey,TValue>
+	 * @return LazyIter<TKey,TValue>
 	 */
-	function take($size): LazyChain {
-		return new LazyChain(new \LimitIterator($this->iterator,0,$size));
+	function take($size): LazyIter {
+		return new LazyIter(new \LimitIterator($this->iterator,0,$size));
 	}
 
 }

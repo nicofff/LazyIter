@@ -1,4 +1,4 @@
-# Lazy Chain
+# Lazy Iter
 
 Library to chain multiple array operations that are evaluated lazily. Inspired by Rust's operations on iterators. 
 
@@ -7,7 +7,7 @@ Library to chain multiple array operations that are evaluated lazily. Inspired b
 ```php
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
-use LazyChain\LazyChain;
+use LazyIter\LazyIter;
 
 function endless_generator(){
 	$i = 1;
@@ -18,7 +18,7 @@ function endless_generator(){
 
 $all_numbers = endless_generator();
 
-$first_4_even_numbers_squared = (new LazyChain($all_numbers))
+$first_4_even_numbers_squared = (new LazyIter($all_numbers))
 	->filter(fn($n) => $n % 2 == 0 )
 	->map(fn($n) => pow($n,2) )
 	->take(4)

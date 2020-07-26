@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-use LazyChain\LazyChain;
+use LazyIter\LazyIter;
 
 final class AllTest extends TestCase {
 
 	public function testFalseCase(): void
 	{
 		$a_false = [true,true,false,true]; 
-		self::assertFalse(LazyChain::fromArray($a_false)->all());    
+		self::assertFalse(LazyIter::fromArray($a_false)->all());    
     }
 
     public function testAllTrue(): void
 	{
 		$all_true = [true,true,true,true];            
-		self::assertTrue(LazyChain::fromArray($all_true)->all());
+		self::assertTrue(LazyIter::fromArray($all_true)->all());
     }
     
     public function testShortCircuit(): void {
@@ -26,7 +26,7 @@ final class AllTest extends TestCase {
 
 		$all_numbers = $all_numbers_generator();
 
-		$all_numbers_are_smaller_than_42  = (new LazyChain($all_numbers))
+		$all_numbers_are_smaller_than_42  = (new LazyIter($all_numbers))
 			->map(fn($n) => $n < 42 )
 			->all();
 
@@ -34,12 +34,12 @@ final class AllTest extends TestCase {
     }
         
     public function testEmpty(): void {
-        self::assertTrue(LazyChain::fromArray([])->all());
+        self::assertTrue(LazyIter::fromArray([])->all());
 	}
 	
 	public function testCallable(): void {
         self::assertTrue(
-			LazyChain::fromArray([2,4,6,8])
+			LazyIter::fromArray([2,4,6,8])
 			->all(fn($x) => $x % 2 == 0)
 		);
     }

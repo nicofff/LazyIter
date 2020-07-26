@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-use LazyChain\LazyChain;
+use LazyIter\LazyIter;
 
 final class NthTest extends TestCase {
 
 	public function testBasicNth(): void
 	{
 		self::assertEquals(
-			LazyChain::fromArray([1,2,3,4,5,6,7,8,9])
+			LazyIter::fromArray([1,2,3,4,5,6,7,8,9])
 				->nth(5),
 			6
 		);    
@@ -16,7 +16,7 @@ final class NthTest extends TestCase {
 	public function testEmptyNth(): void
 	{
 		self::assertEquals(
-			LazyChain::fromArray([])
+			LazyIter::fromArray([])
 				->nth(3),
 			null
 		);    

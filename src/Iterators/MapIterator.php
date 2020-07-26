@@ -1,7 +1,7 @@
 <?php 
 declare(strict_types = 1);
 
-Namespace LazyChain\Iterators;
+Namespace LazyIter\Iterators;
 /**
  * @template T
  * @template U

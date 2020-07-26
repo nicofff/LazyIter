@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-use LazyChain\LazyChain;
+use LazyIter\LazyIter;
 
 final class FoldTest extends TestCase {
 
     public function testBasicFold(): void
 	{
 		self::assertEquals(
-			LazyChain::fromArray([2,4,6,8])
+			LazyIter::fromArray([2,4,6,8])
 			->fold(0,fn(int $acc, int $n): int => $acc + $n)
 			,20
 		);
@@ -16,7 +16,7 @@ final class FoldTest extends TestCase {
 	public function testStrings(): void
 	{
 		self::assertEquals(
-			LazyChain::fromArray([2,4,6,8])
+			LazyIter::fromArray([2,4,6,8])
 			->fold("",fn(string $acc,int $n): string => $acc . $n)
 			,"2468"
 		);
@@ -25,7 +25,7 @@ final class FoldTest extends TestCase {
 	public function testArray(): void
 	{
 		self::assertEquals(
-			LazyChain::fromArray([2,4,6,8])
+			LazyIter::fromArray([2,4,6,8])
 			->fold([],function(array $acc,int $n): array{
 				$acc[] = $n;
 				$acc[] = $n +1;
