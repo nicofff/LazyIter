@@ -10,9 +10,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 use LazyChain\LazyChain;
 
 function endless_generator(){
-	$i = 0;
+	$i = 1;
 	while(true){
-		yield foo($i++);
+		yield $i++;
 	}
 }
 
@@ -29,10 +29,10 @@ print_r($first_4_even_numbers_squared);
 $ php main.php
 Array
 (
-    [0] => 0
-    [1] => 4
-    [2] => 16
-    [3] => 36
+    [0] => 4
+    [1] => 16
+    [2] => 36
+    [3] => 64
 )
 ```
 
