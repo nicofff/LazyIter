@@ -172,6 +172,19 @@ class LazyChain {
 	}
 
 	/**
+	 * Consumes the iterator, returning the last element.
+	 * If iterator is empty, it returns null
+	 * @return TValue | null
+	 */
+	function last() {
+		$return = null;
+		foreach($this->iterator as $elem){
+			$return = $elem;
+		}
+		return $return;
+	}
+
+	/**
 	 * Takes a closure and creates an iterator which calls that callable on each element.  
 	 * map() transforms one iterator into another, by means of its callable argument. It produces a new iterator which calls this closure on each element of the original iterator.  
 	 * If you are good at thinking in types, you can think of map() like this: If you have an iterator that gives you elements of some type A, and you want an iterator of some other type B, you can use map(), passing a callable that takes an A and returns a B.
@@ -181,6 +194,22 @@ class LazyChain {
 	 */
 	function map($callable): LazyChain {
 		return new LazyChain(new Iterators\MapIterator($this->iterator,$callable));
+	}
+
+	/**
+	 * Returns the nth element of the iterator.  
+	 * If iterator has less than greater than or equal to the lenght of the iterator  
+	 * Like most indexing operations, the count starts from zero, so nth(0) returns the first value, nth(1) the second, and so on.  
+	 * @param int $position
+	 * @return TValue | null
+	 */
+	function nth($position) {
+		foreach($this->iterator as $elem){
+			if($position-- === 0){
+				return $elem;
+			}	
+		}
+		return null;
 	}
 
 	/**
