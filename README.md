@@ -2,6 +2,10 @@
 
 Library to chain multiple array operations that are evaluated lazily. Inspired by Rust's operations on iterators. 
 
+# Install
+
+`composer require nicofff/lazy-iter`
+
 # Example
 
 ```php
