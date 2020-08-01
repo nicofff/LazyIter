@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use LazyIter\LazyIter;
+use LazyIter\Helpers\Generators;
 
 final class AllTest extends TestCase {
 
@@ -17,14 +18,8 @@ final class AllTest extends TestCase {
     }
     
     public function testShortCircuit(): void {
-		 $all_numbers_generator = function (): Generator{
-			$i = 0;
-			while(true){
-				yield $i++;
-			}
-		};
 
-		$all_numbers = $all_numbers_generator();
+		$all_numbers = Generators::infinite_range(1,1);
 
 		$all_numbers_are_smaller_than_42  = (new LazyIter($all_numbers))
 			->map(fn($n) => $n < 42 )

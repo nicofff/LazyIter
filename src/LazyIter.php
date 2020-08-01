@@ -231,4 +231,15 @@ class LazyIter {
 		return new LazyIter(new \LimitIterator($this->iterator,0,$size));
 	}
 
+	/**
+	 * Creates an iterator that yields elements based on a predicate.
+	 * take_while() takes a closure as an argument. It will call this closure on each element of the iterator, and yield elements while it returns true.
+	 * After false is returned, take_while()'s job is over, and the rest of the elements are ignored.
+	 * @param callable(TValue): bool $callable
+	 * @return LazyIter<TKey,TValue>
+	 */
+	function take_while($callable): LazyIter {
+		return new LazyIter(new Iterators\TakeWhileIterator($this->iterator,$callable));
+	}
+
 }

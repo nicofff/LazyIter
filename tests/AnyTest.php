@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use LazyIter\LazyIter;
+use LazyIter\Helpers\Generators;
 
 final class AnyTest extends TestCase {
 
@@ -17,15 +18,8 @@ final class AnyTest extends TestCase {
     }
 	
     public function testShortCircuit(): void {
-        $all_numbers_generator = function (): Generator {
-			$i = 0;
-			while(true){
-				yield $i++;
-			}
-		};
 
-		/** @var Iterator<int> $all_numbers */
-		$all_numbers = $all_numbers_generator();
+		$all_numbers = Generators::infinite_range(1,1);
 
 		$any_number_divisible_by_42  = (new LazyIter($all_numbers))
 			->map(fn(int $n) => $n % 42 == 0)
