@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use LazyIter\LazyIter;
-use LazyIter\Helpers\Generators;
+use LazyIter\Helpers\Generators\Range;
 
 final class TakeWhileTest extends TestCase {
 
@@ -25,7 +25,7 @@ final class TakeWhileTest extends TestCase {
 	
     public function testInfiniteIterator(): void {
 		self::assertEquals(
-			(new LazyIter(Generators::infinite_range(1,1)))
+			(new LazyIter(Range::rangeFrom(1)))
 			->take_while(fn($n) => $n < 7)
 			->collect()
 			,[1,2,3,4,5,6]

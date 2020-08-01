@@ -242,4 +242,12 @@ class LazyIter {
 		return new LazyIter(new Iterators\TakeWhileIterator($this->iterator,$callable));
 	}
 
+	/**
+	 * Sums the elements of an iterator.
+	 * @return TValue
+	 */
+	function sum() {
+		return $this->fold(0,fn($acc, $n) => $acc + $n);
+	}
+
 }
