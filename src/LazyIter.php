@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 Namespace LazyIter;
 
-use Exception;
-
 /**
  * @template TKey
  * @template TValue
@@ -140,7 +138,7 @@ class LazyIter {
 	 * @param callable(TValue): bool $callable
 	 * @return LazyIter<TKey,TValue>
 	 */
-	function filter($callable): LazyIter {
+	function filter(callable $callable): LazyIter {
 		return new LazyIter(new Iterators\FilterIterator($this->iterator,$callable));
 	}
 
@@ -195,7 +193,7 @@ class LazyIter {
 	 * @param callable(TValue): UValue $callable
 	 * @return LazyIter<TKey,UValue>
 	 */
-	function map($callable): LazyIter {
+	function map(callable $callable): LazyIter {
 		return new LazyIter(new Iterators\MapIterator($this->iterator,$callable));
 	}
 
@@ -206,7 +204,7 @@ class LazyIter {
 	 * @param int $position
 	 * @return TValue | null
 	 */
-	function nth($position) {
+	function nth(int $position) {
 		foreach($this->iterator as $elem){
 			if($position-- === 0){
 				return $elem;
@@ -220,29 +218,8 @@ class LazyIter {
 	 * @param int $skip
 	 * @return LazyIter<TKey,TValue>
 	 */
-	function skip($skip): LazyIter {
+	function skip(int $skip): LazyIter {
 		return new LazyIter(new Iterators\SkipIterator($this->iterator,$skip));
-	}
-
-	/**
-	 * Creates an iterator that yields its first n elements.
-	 * If less than $size elements are available, take will limit itself to the size of the underlying iterator:
-	 * @param int $size
-	 * @return LazyIter<TKey,TValue>
-	 */
-	function take($size): LazyIter {
-		return new LazyIter(new \LimitIterator($this->iterator,0,$size));
-	}
-
-	/**
-	 * Creates an iterator that yields elements based on a predicate.
-	 * take_while() takes a closure as an argument. It will call this closure on each element of the iterator, and yield elements while it returns true.
-	 * After false is returned, take_while()'s job is over, and the rest of the elements are ignored.
-	 * @param callable(TValue): bool $callable
-	 * @return LazyIter<TKey,TValue>
-	 */
-	function take_while($callable): LazyIter {
-		return new LazyIter(new Iterators\TakeWhileIterator($this->iterator,$callable));
 	}
 
 	/**
@@ -260,6 +237,27 @@ class LazyIter {
 			$sum += $value;
 		}
 		return $sum;
+	}
+
+	/**
+	 * Creates an iterator that yields its first n elements.
+	 * If less than $size elements are available, take will limit itself to the size of the underlying iterator:
+	 * @param int $size
+	 * @return LazyIter<TKey,TValue>
+	 */
+	function take(int $size): LazyIter {
+		return new LazyIter(new \LimitIterator($this->iterator,0,$size));
+	}
+
+	/**
+	 * Creates an iterator that yields elements based on a predicate.
+	 * take_while() takes a closure as an argument. It will call this closure on each element of the iterator, and yield elements while it returns true.
+	 * After false is returned, take_while()'s job is over, and the rest of the elements are ignored.
+	 * @param callable(TValue): bool $callable
+	 * @return LazyIter<TKey,TValue>
+	 */
+	function take_while(callable $callable): LazyIter {
+		return new LazyIter(new Iterators\TakeWhileIterator($this->iterator,$callable));
 	}
 
 }
