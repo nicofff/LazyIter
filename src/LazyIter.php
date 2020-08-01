@@ -2,6 +2,9 @@
 declare(strict_types = 1);
 
 Namespace LazyIter;
+
+use Exception;
+
 /**
  * @template TKey
  * @template TValue
@@ -244,10 +247,19 @@ class LazyIter {
 
 	/**
 	 * Sums the elements of an iterator.
-	 * @return TValue
+	 * Throws \TypeError if elements are niether int nor float
+	 * @throws \TypeError
+	 * @return int | float
 	 */
 	function sum() {
-		return $this->fold(0,fn($acc, $n) => $acc + $n);
+		$sum = 0;
+		foreach ($this->iterator as $value) {
+			if(!is_int($value) && !is_float($value)){
+				throw new \TypeError("Iterator element value is neither int nor float");
+			}
+			$sum += $value;
+		}
+		return $sum;
 	}
 
 }
