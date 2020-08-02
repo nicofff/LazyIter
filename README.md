@@ -1,6 +1,6 @@
 # Lazy Iter
 
-Library to chain multiple array operations that are evaluated lazily. Inspired by Rust's operations on iterators. 
+Lazy array function chains inspired by Rust
 
 # Design goals
 
@@ -56,5 +56,21 @@ echo $sum_squares_under_a_million;
 ## Type Enforcement
 
 Currently using PHPStan for type validation. Check `type_tests` for a list of things it caches for each method
+
+### Example
+
+```php
+LazyIter::fromArray([2,4,6,8])
+->for_each(function(string $n): void{
+	echo $n;
+});
+```
+
+Raises:
+```
+Parameter #1 $callable of method                                      
+         LazyIter\LazyIter<int,int>::for_each() expects callable(int): mixed,  
+         Closure(string): void given. 
+```
 
 Accepting contributions to support Phan and Psalm
