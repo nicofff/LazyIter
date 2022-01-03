@@ -51,7 +51,7 @@ class LazyIter {
 	 * An empty iterator returns true.
 	 * 
 	 * If the callable is ommited, then a strict comparison to true is used
-	 * @param callable(T): bool $predicate | null
+	 * @param callable(TValue): bool $predicate | null
 	 */
 	function all(?callable $predicate = null ): bool{
 		if(is_null($predicate)){
@@ -74,7 +74,7 @@ class LazyIter {
 	 * An empty iterator returns true.
 	 * 
 	 * If the callable is ommited, then a strict comparison to true is used	 
-	 * @param callable(T): bool $predicate
+	 * @param callable(TValue): bool $predicate
 	 */
 	function any(?callable $predicate = null ): bool{
 		if(is_null($predicate)){
