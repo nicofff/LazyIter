@@ -18,14 +18,14 @@
         }
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12.33",
+        "phpstan/phpstan": "^1.3",
         "phpunit/phpunit": "^9",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan-strict-rules": "^0.12.4",
-        "phpstan/phpstan-phpunit": "^0.12.13"
+        "phpstan/phpstan-strict-rules": "^1.1",
+        "phpstan/phpstan-phpunit": "^1.0"
     },
     "scripts": {
-        "test:phpstan": "phpstan analyse",
+        "test:phpstan": "phpstan analyse --error-format=raw",
         "test:phpstan:types": "phpstan analyse -c phpstan.types.neon",
 		"test:phpunit": "phpunit tests/",
         "test": "composer test:phpstan && composer test:phpunit"

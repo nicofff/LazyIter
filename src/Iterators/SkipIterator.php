@@ -3,9 +3,9 @@ declare(strict_types = 1);
 
 Namespace LazyIter\Iterators;
 /**
- * @template T
- * @phpstan-implements \Iterator<mixed,T>
- * @phpstan-extends BaseIterator<T>
+ * @template ValueType
+ * @phpstan-implements \Iterator<mixed,ValueType>
+ * @phpstan-extends BaseIterator<ValueType>
  */
 class SkipIterator extends BaseIterator implements \Iterator {
     
@@ -13,7 +13,7 @@ class SkipIterator extends BaseIterator implements \Iterator {
     private int $currentPosition;
 
     /**
-     * @param \Iterator<T> $previousIterator
+     * @param \Iterator<ValueType> $previousIterator
      * @param int $skip
      */
     public function __construct(\Iterator $previousIterator, int $skip ) {
@@ -24,7 +24,7 @@ class SkipIterator extends BaseIterator implements \Iterator {
     }
 
     /**
-     * @return T
+     * @return ValueType
      */
     public function current() {
         if($this->currentPosition < $this->skip){

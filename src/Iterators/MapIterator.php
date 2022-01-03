@@ -3,33 +3,55 @@ declare(strict_types = 1);
 
 Namespace LazyIter\Iterators;
 /**
- * @template T
- * @template U
- * @phpstan-implements \Iterator<mixed,T>
- * @phpstan-extends BaseIterator<T>
+ * @template PreviousValueType
+ * @template ValueType
+ * @phpstan-implements \Iterator<mixed,ValueType>
  */
-class MapIterator extends BaseIterator implements \Iterator {
+class MapIterator implements \Iterator {
 
     /**
-     * @var callable(U): T $callable
+     * @var callable(PreviousValueType): ValueType $callable
      */
     private $callable;
 
-    /** @var \Iterator<U> $previousIterator */
+    /** @var \Iterator<PreviousValueType> $previousIterator */
     protected \Iterator $previousIterator; 
     
     /**
-     * @param \Iterator<U> $previousIterator
-     * @param callable(U): T $callable
+     * @param \Iterator<PreviousValueType> $previousIterator
+     * @param callable(PreviousValueType): ValueType $callable
      */
     public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
         $this->callable = $callable;
     }
 
-    /** @return T */
+    /** @return ValueType */
     public function current() {
         return ($this->callable)($this->previousIterator->current());
+    }
+
+
+
+    /** PHPSTAN doesn't like the fact that $previousIterator doens't have the same type as the current Iterator, so we can't extend the base, manually including the methods here */
+
+    public function rewind(): void {
+        $this->previousIterator->rewind();
+    }
+    
+    public function next(): void {
+        $this->previousIterator->next();
+    }
+
+    public function valid(): bool {
+        return $this->previousIterator->valid();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function key(){
+        return $this->previousIterator->key();
     }
 
 }

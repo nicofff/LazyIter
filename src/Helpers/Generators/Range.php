@@ -26,6 +26,7 @@ class Range {
      * @return \Generator<int>
      */
     static function rangeFrom(int $start){
+        /** @phpstan-ignore-next-line */
         while(true){
             yield $start++;
         }

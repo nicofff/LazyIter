@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 Namespace LazyIter\Iterators;
 /**
- * @template T
- * @phpstan-implements \Iterator<mixed,T>
+ * @template ValueType
+ * @phpstan-implements \Iterator<mixed,ValueType>
  */
 abstract class BaseIterator implements \Iterator {
 
-    /** @var \Iterator<T> $previousIterator */
+    /** @var \Iterator<ValueType> $previousIterator */
     protected \Iterator $previousIterator; 
 
     public function rewind(): void {
@@ -24,7 +24,7 @@ abstract class BaseIterator implements \Iterator {
     }
 
     /**
-     * @return T
+     * @return ValueType
      */
     abstract function current();
 

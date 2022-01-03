@@ -33,10 +33,9 @@ class LazyIter {
 	}
 
 	/**
-	 * @template AKey
 	 * @template AValue
-	 * @param array<AKey,AValue> $sourceArray
-	 * @return LazyIter<AKey,AValue>
+	 * @param array<int|string,AValue> $sourceArray
+	 * @return LazyIter<int|string,AValue>
 	 */
 	static function fromArray(array $sourceArray): LazyIter {
 		return new LazyIter(new \ArrayIterator($sourceArray));

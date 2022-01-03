@@ -3,20 +3,20 @@ declare(strict_types = 1);
 
 Namespace LazyIter\Iterators;
 /**
- * @template T
- * @phpstan-implements \Iterator<mixed,T>
- * @phpstan-extends BaseIterator<T>
+ * @template ValueType
+ * @phpstan-implements \Iterator<mixed,ValueType>
+ * @phpstan-extends BaseIterator<ValueType>
  */
 class FilterIterator extends BaseIterator implements \Iterator {
 
     /**
-     * @var callable(T):bool $callable
+     * @var callable(ValueType):bool $callable
      */
     private $callable;
 
     /**
-     * @param \Iterator<T> $previousIterator
-     * @param callable(T):bool $callable
+     * @param \Iterator<ValueType> $previousIterator
+     * @param callable(ValueType):bool $callable
      */
     public function __construct(\Iterator $previousIterator, callable $callable ) {
         $this->previousIterator = $previousIterator;
@@ -34,7 +34,7 @@ class FilterIterator extends BaseIterator implements \Iterator {
     }
 
     /**
-     * @return T
+     * @return ValueType
      */
     public function current() {
         return $this->previousIterator->current();
