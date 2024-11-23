@@ -26,7 +26,7 @@ class TakeWhileIterator extends BaseIterator implements \Iterator {
     /**
      * @return ValueType
      */
-    public function current() {
+    public function current(): mixed {
         return $this->previousIterator->current();
     }
 

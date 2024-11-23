@@ -5,5 +5,3 @@ use LazyIter\LazyIter;
 // TODO: Make this warn
 LazyIter::fromArray(["uno","dos","tres"])
     ->sum();
-
-         

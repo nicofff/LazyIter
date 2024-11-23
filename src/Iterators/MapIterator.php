@@ -27,7 +27,7 @@ class MapIterator implements \Iterator {
     }
 
     /** @return ValueType */
-    public function current() {
+    public function current(): mixed {
         return ($this->callable)($this->previousIterator->current());
     }
 
@@ -50,7 +50,7 @@ class MapIterator implements \Iterator {
     /**
      * @return mixed
      */
-    public function key(){
+    public function key(): mixed{
         return $this->previousIterator->key();
     }
 

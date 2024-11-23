@@ -4,8 +4,8 @@ declare(strict_types = 1);
 Namespace LazyIter\Iterators;
 /**
  * @template ValueType
- * @phpstan-implements \Iterator<mixed,ValueType>
- * @phpstan-extends BaseIterator<ValueType>
+ * @implements \Iterator<mixed,ValueType>
+ * @extends BaseIterator<ValueType>
  */
 class FilterIterator extends BaseIterator implements \Iterator {
 
@@ -36,7 +36,7 @@ class FilterIterator extends BaseIterator implements \Iterator {
     /**
      * @return ValueType
      */
-    public function current() {
+    public function current(): mixed {
         return $this->previousIterator->current();
     }
 

@@ -26,7 +26,7 @@ class SkipIterator extends BaseIterator implements \Iterator {
     /**
      * @return ValueType
      */
-    public function current() {
+    public function current(): mixed {
         if($this->currentPosition < $this->skip){
             $this->next();
         }

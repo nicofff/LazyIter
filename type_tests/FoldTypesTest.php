@@ -11,4 +11,3 @@ LazyIter::fromArray([1,2,3,4])
 // Note: The error here is not particularly nice at time of writing
 LazyIter::fromArray([1,2,3,4])
 ->fold(0,fn(string $acc,int $n) => $acc . $n);
-         

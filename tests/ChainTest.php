@@ -15,6 +15,7 @@ final class ChainTest extends TestCase {
 	
 	public function testEmpty(): void
 	{
+		/** @var \Iterator<string> */
 		$iterator_a = new ArrayIterator([]);
 		$iterator_b = new ArrayIterator(['d', 'e', 'f']);
 		$chainedIterators = (new LazyIter($iterator_a))

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 Namespace LazyIter\Iterators;
 /**
  * @template ValueType
- * @phpstan-implements \Iterator<mixed,ValueType>
+ * @implements \Iterator<ValueType>
  */
 abstract class BaseIterator implements \Iterator {
 
@@ -26,12 +26,9 @@ abstract class BaseIterator implements \Iterator {
     /**
      * @return ValueType
      */
-    abstract function current();
+    abstract function current(): mixed;
 
-    /**
-     * @return mixed
-     */
-    public function key(){
+    public function key(): mixed {
         return $this->previousIterator->key();
     }
 }

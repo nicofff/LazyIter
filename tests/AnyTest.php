@@ -22,7 +22,7 @@ final class AnyTest extends TestCase {
 		$all_numbers = Range::rangeFrom(1);
 
 		$any_number_divisible_by_42  = (new LazyIter($all_numbers))
-			->map(fn(int $n) => $n % 42 == 0)
+			->map(fn(int $n) => $n % 42 === 0)
 			->any();
 
 		self::assertTrue($any_number_divisible_by_42);
@@ -35,7 +35,7 @@ final class AnyTest extends TestCase {
 	public function testCallable(): void {
         self::assertTrue(
 			LazyIter::fromArray([1,3,6,7])
-			->any(fn($x) => $x % 2 == 0)
+			->any(fn($x) => $x % 2 === 0)
 		);
     }
 }

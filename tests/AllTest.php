@@ -35,7 +35,7 @@ final class AllTest extends TestCase {
 	public function testCallable(): void {
         self::assertTrue(
 			LazyIter::fromArray([2,4,6,8])
-			->all(fn($x) => $x % 2 == 0)
+			->all(fn($x) => $x % 2 === 0)
 		);
     }
 }
