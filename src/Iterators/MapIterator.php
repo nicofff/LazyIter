@@ -5,7 +5,7 @@ Namespace LazyIter\Iterators;
 /**
  * @template PreviousValueType
  * @template ValueType
- * @phpstan-implements \Iterator<mixed,ValueType>
+ * @implements \Iterator<mixed,ValueType>
  */
 class MapIterator implements \Iterator {
 

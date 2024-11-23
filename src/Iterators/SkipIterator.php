@@ -4,8 +4,8 @@ declare(strict_types = 1);
 Namespace LazyIter\Iterators;
 /**
  * @template ValueType
- * @phpstan-implements \Iterator<mixed,ValueType>
- * @phpstan-extends BaseIterator<ValueType>
+ * @implements \Iterator<mixed,ValueType>
+ * @extends BaseIterator<ValueType>
  */
 class SkipIterator extends BaseIterator implements \Iterator {
     
